@@ -22,6 +22,8 @@ vim.g.copilot_no_tab_map = true
 vim.g.copilot_assume_mapped = true
 vim.g.copilot_tab_fallback = ""
 
+lvim.lsp.diagnostics.virtual_text = false
+
 -- keymappings [view all the defaults by pressing <leader>Lk]
 lvim.leader = "space"
 -- add your own keymapping
@@ -198,6 +200,16 @@ lvim.plugins = {
 --     require("nvim-treesitter.highlight").attach(0, "bash")
 --   end,
 -- })
+--
+lvim.autocommands = {
+  {
+    "CursorHold",
+    {
+      pattern = "*",
+      command = "lua vim.diagnostic.open_float(0,{scope='line'})",
+    }
+  },
+}
 
 -- copilot setting
 local cmp = require "cmp"
