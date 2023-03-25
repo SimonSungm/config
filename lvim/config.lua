@@ -18,6 +18,9 @@ vim.opt.expandtab = false -- not convert tabs to spaces
 vim.opt.shiftwidth = 8	
 vim.opt.numberwidth = 2
 vim.opt.tabstop = 8
+vim.g.copilot_no_tab_map = true
+vim.g.copilot_assume_mapped = true
+vim.g.copilot_tab_fallback = ""
 
 -- keymappings [view all the defaults by pressing <leader>Lk]
 lvim.leader = "space"
@@ -177,6 +180,9 @@ lvim.plugins = {
   {
     "ludovicchabant/vim-gutentags"
   },
+  {
+    "github/copilot.vim"
+  },
 }
 
 -- Autocommands (https://neovim.io/doc/user/autocmd.html)
@@ -192,3 +198,18 @@ lvim.plugins = {
 --     require("nvim-treesitter.highlight").attach(0, "bash")
 --   end,
 -- })
+
+-- copilot setting
+local cmp = require "cmp"
+lvim.builtin.cmp.mapping["<Tab>"] = function(fallback)
+  if cmp.visible() then
+    cmp.select_next_item()
+  else
+    local copilot_keys = vim.fn["copilot#Accept"]()
+    if copilot_keys ~= "" then
+      vim.api.nvim_feedkeys(copilot_keys, "i", true)
+    else
+      fallback()
+    end
+  end
+end
