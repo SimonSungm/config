@@ -15,9 +15,9 @@ lvim.colorscheme = "lunar"
 -- to disable icons and use a minimalist setup, uncomment the following
 -- lvim.use_icons = false
 vim.opt.expandtab = false -- not convert tabs to spaces
-vim.opt.shiftwidth = 8	
+vim.opt.shiftwidth = 4
 vim.opt.numberwidth = 2
-vim.opt.tabstop = 8
+vim.opt.tabstop = 4
 vim.g.copilot_no_tab_map = true
 vim.g.copilot_assume_mapped = true
 vim.g.copilot_tab_fallback = ""
